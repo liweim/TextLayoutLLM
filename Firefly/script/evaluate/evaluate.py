@@ -2,7 +2,6 @@ from mmengine.config import read_base
 from opencompass.models import HuggingFaceCausalLM
 
 batch_size = 20
-# 指定评测模型
 model_name_or_paths = [
     'internlm/internlm-chat-7b',
     'baichuan-inc/Baichuan-13B-Chat',
@@ -21,7 +20,6 @@ model_name_or_paths = [
 
 models = []
 for model_name_or_path in model_name_or_paths:
-    # baichuan-7b与qwen的pad_token_id为None，将无法正常评测
     if 'baichuan-7b' in model_name_or_path.lower():
         pad_token = '</s>'
     elif 'qwen' in model_name_or_path.lower():
@@ -51,7 +49,6 @@ for model_name_or_path in model_name_or_paths:
     models.append(model)
 
 
-# 指定评测集
 with read_base():
     from .datasets.ceval.ceval_ppl import ceval_datasets
     from .summarizers.example import summarizer

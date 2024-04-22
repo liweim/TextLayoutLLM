@@ -66,7 +66,6 @@ def compute_anls(pred, gts, tau=0.5, rank=0):
 
 
 def compute_anls_improve(pred, gts, tau=0.5):
-    # 平均归一化Levenshtein相似度
     import textdistance as td
 
     max_s = 0
@@ -263,7 +262,6 @@ def ngram(decoded_preds, decoded_labels):
     for pred, label in zip(decoded_preds, decoded_labels):
         pred_lens += len(pred)
         label_lens += len(label)
-        # 开放式问答中label为空的时候：跳过
         if label == '':
             no_std_ans_cnt += 1
             continue

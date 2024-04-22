@@ -5,7 +5,7 @@ from loguru import logger
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 app = Flask(__name__)
-app.config["JSON_AS_ASCII"] = False  # 防止返回中文乱码
+app.config["JSON_AS_ASCII"] = False
 
 
 @app.route('/firefly', methods=['POST'])
@@ -13,11 +13,9 @@ def ds_llm():
     params = request.get_json()
     inputs = params.pop('inputs').strip()
 
-    # chatglm使用官方的数据组织格式
     if model.config.model_type == 'chatglm':
         text = '[Round 1]\n\n问：{}\n\n答：'.format(inputs)
         input_ids = tokenizer(text, return_tensors="pt", add_special_tokens=False).input_ids.to(device)
-    # 为了兼容qwen-7b，因为其对eos_token进行tokenize，无法得到对应的eos_token_id
     else:
         input_ids = tokenizer(inputs, return_tensors="pt", add_special_tokens=False).input_ids.to(device)
         bos_token_id = torch.tensor([[tokenizer.bos_token_id]], dtype=torch.long).to(device)
@@ -45,14 +43,12 @@ def ds_llm():
 
 
 if __name__ == '__main__':
-    # 参数设置
     model_name_or_path = 'YeungNLP/firefly-baichuan-13b'
     log_file = 'service_history.txt'
     port = 8877
     device = 'cuda'
     logger.info(f"Starting to load the model {model_name_or_path} into memory")
 
-    # 加载model和tokenizer
     model = AutoModelForCausalLM.from_pretrained(
         model_name_or_path,
         trust_remote_code=True,
@@ -63,10 +59,8 @@ if __name__ == '__main__':
     tokenizer = AutoTokenizer.from_pretrained(
         model_name_or_path,
         trust_remote_code=True,
-        # llama不支持fast
         use_fast=False if model.config.model_type == 'llama' else True
     )
-    # QWenTokenizer比较特殊，pad_token_id、bos_token_id、eos_token_id均为None。eod_id对应的token为<|endoftext|>
     if tokenizer.__class__.__name__ == 'QWenTokenizer':
         tokenizer.pad_token_id = tokenizer.eod_id
         tokenizer.bos_token_id = tokenizer.eod_id
@@ -74,7 +68,6 @@ if __name__ == '__main__':
 
     logger.info(f"Successfully loaded the model {model_name_or_path} into memory")
 
-    # 计算模型参数量
     total = sum(p.numel() for p in model.parameters())
     print("Total model params: %.2fM" % (total / 1e6))
     model.eval()

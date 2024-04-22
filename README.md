@@ -39,9 +39,9 @@ Install packages listed in requirements.txt. Python version has been tested is 3
 pip install -r requirements.txt
 ```
 
-## Dataset
+## Datasets and models
 
-All the datasets can be either downloaded from Google Drive: , or generated from the scripts. For example, to generate
+All the datasets can be either downloaded from Alipan: https://www.alipan.com/s/69biCNYgfz8, or generated from the scripts. For example, to generate
 dataset `TextLayoutQA`, run the following script:
 
 ```
@@ -53,23 +53,21 @@ The folder structure of the downloaded dataset is as follows:
 
 ```
    - DocVQA
-   -- data: dataset.
-   -- result: evaluation results.
+   -- data: dataset of DocVQA.
+   -- result: evaluation results of DocVQA.
    - FeTaQA
    -- (same as DocVQA)
    - Firefly: instruction tuning framework
-   -- data: dataset.
-   -- result: evaluation results.
-   -- llm: SFT model weights.
+   -- data: instruction-tuning dataset.
+   -- result: testing results of instruction-tuning.
+   -- weight: SFT model weights.
    - TextLayoutQA
    -- (same as DocVQA)
    - XfundQA
    -- (same as DocVQA)
 ```
 
-## Model weights
-
-All the SFT model weights can be downloaded from Google Drive: . To be noted, the base model weights are not provided
+All the SFT model weights can also be downloaded from the same link. To be noted, the base model weights are not provided
 due to the huge size. You can either download the base weights from Huggingface website or use the following download
 script:
 

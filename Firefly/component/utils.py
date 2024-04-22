@@ -7,7 +7,6 @@ class ModelUtils(object):
 
     @classmethod
     def load_model(cls, model_name_or_path, load_in_4bit=False, adapter_name_or_path=None):
-        # 是否使用4bit量化进行推理
         if load_in_4bit:
             quantization_config = BitsAndBytesConfig(
                 load_in_4bit=True,
@@ -20,7 +19,6 @@ class ModelUtils(object):
         else:
             quantization_config = None
 
-        # 加载base model
         model = AutoModelForCausalLM.from_pretrained(
             model_name_or_path,
             load_in_4bit=load_in_4bit,
@@ -31,7 +29,6 @@ class ModelUtils(object):
             quantization_config=quantization_config
         )
 
-        # 加载adapter
         if adapter_name_or_path is not None:
             model = PeftModel.from_pretrained(model, adapter_name_or_path)
 

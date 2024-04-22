@@ -1,9 +1,6 @@
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
 import torch
-"""
-使用该脚本，将lora的权重合并到base model中
-"""
 
 
 def merge_lora_to_base_model():
@@ -15,7 +12,6 @@ def merge_lora_to_base_model():
     tokenizer = AutoTokenizer.from_pretrained(
         model_name_or_path,
         trust_remote_code=True,
-        # llama不支持fast
         use_fast=False if config.model_type == 'llama' else True
     )
     model = AutoModelForCausalLM.from_pretrained(

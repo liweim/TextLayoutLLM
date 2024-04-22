@@ -10,9 +10,6 @@ logger = logging.get_logger(__name__)
 
 
 class BloomForCausalLM(transformers.BloomForCausalLM):
-    """
-    继承自BloomForCausalLM，区别在于只计算target部分的loss
-    """
     def forward(
         self,
         input_ids=None,
