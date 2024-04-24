@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 ## Datasets and models
 
-All the datasets can be either downloaded from Alipan: https://www.alipan.com/s/69biCNYgfz8, or generated from the scripts. For example, to generate
+All the datasets can be either downloaded from Alipan (will be published later), or generated from the scripts. For example, to generate
 dataset `TextLayoutQA`, run the following script:
 
 ```
@@ -94,5 +94,12 @@ under `train_args` folder.
 torchrun --nproc_per_node=8 train_qlora.py --train_args_file train_args/baichuan2-7b-sft-qlora.json
 ```
 
+## Test
+Script for testing the instruction-tuning performance is shown below.
+
+```
+cd Firefly
+python eval.py
+```
 
 
