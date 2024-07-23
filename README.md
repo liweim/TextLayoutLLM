@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 ## Datasets and models
 
-All the datasets can be either downloaded from Alipan (will be published later), or generated from the scripts. For example, to generate
+All the datasets can be either downloaded from Alipan (https://www.alipan.com/s/v6FrwXjq166), or generated from the scripts. For example, to generate
 dataset `TextLayoutQA`, run the following script:
 
 ```
