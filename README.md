@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 ## Datasets
 
-The datasets can be downloaded from Alipan (https://www.alipan.com/s/v6FrwXjq166).
+The datasets can be downloaded from Alipan (https://www.alipan.com/s/v6FrwXjq166) or Google Drive (https://drive.google.com/drive/folders/1w8LD-gfskhn_rK8dxO5WZ4LPqRY4HPDQ?usp=sharing).
 
 ## Evaluate
 
